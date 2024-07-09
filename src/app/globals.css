@@ -1,3 +1,51 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* styles.css */
+.slider {
+    appearance: none;
+    width: 100%;
+    height: 8px; /* Default thickness */
+    background: #6b46c1; /* Tailwind color purple-600 */
+    outline: none;
+    opacity: 0.7;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    background: #4c51bf; /* Tailwind color purple-700 */
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    background: #4c51bf;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+@media (min-width: 768px) {
+    .slider {
+        height: 4px; /* Thinner for larger screens */
+    }
+    
+    .slider::-webkit-slider-thumb {
+        width: 16px; /* Smaller thumb for larger screens */
+        height: 16px;
+    }
+
+    .slider::-moz-range-thumb {
+        width: 16px;
+        height: 16px;
+    }
+}
