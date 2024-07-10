@@ -87,7 +87,7 @@ const DashboardPage = () => {
                 }
 
                 try {
-                    const historyResponse = await fetch(`/api/history_nutrition?userEmail=${encodeURIComponent(session.user.email)}`);
+                    const historyResponse = await fetch(`/api/historyNutrition?userEmail=${encodeURIComponent(session.user.email)}`);
                     if (historyResponse.ok) {
                         const historyJson = await historyResponse.json();
                         if (historyJson.message === 'Nutrition history fetched successfully') {

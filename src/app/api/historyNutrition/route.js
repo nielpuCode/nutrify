@@ -1,4 +1,4 @@
-// src/app/api/history_nutrition/route.js
+// src/app/api/historyNutrition/route.js
 
 import connect from '../../../utils/db';
 import Nutrition from '../../../models/Nutrition';
