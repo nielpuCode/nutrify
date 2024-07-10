@@ -8,6 +8,7 @@ const connect = async () => {
         await mongoose.connect(process.env.MONGODB_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
+            // dbName: 'nutripal',
         });
         console.log("Mongo Connection successfully established.");
     } catch (error) {
