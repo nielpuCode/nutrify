@@ -82,25 +82,25 @@ const DashboardPage = () => {
                     console.error('Error fetching nutrition data:', error);
                 }
 
-                // try {
-                //     const historyResponse = await fetch(`/api/historyNutrition?userEmail=${encodeURIComponent(session.user.email)}`);
-                //     if (historyResponse.ok) {
-                //         const historyJson = await historyResponse.json();
-                //         if (historyJson.message === 'Nutrition history fetched successfully') {
-                //             setHistoryData(historyJson.data.filter(dayData => {
-                //                 const today = new Date().setHours(0, 0, 0, 0);
-                //                 const dayDate = new Date(dayData.date).setHours(0, 0, 0, 0);
-                //                 return dayDate < today; // Filter out today's data
-                //             }));
-                //         } else {
-                //             console.log('No history data fetched or error occurred:', historyJson.message);
-                //         }
-                //     } else {
-                //         throw new Error(`HTTP error! Status: ${historyResponse.status}`);
-                //     }
-                // } catch (error) {
-                //     console.error('Error fetching nutrition history:', error);
-                // }
+                try {
+                    const historyResponse = await fetch(`/api/historyNutrition?userEmail=${encodeURIComponent(session.user.email)}`);
+                    if (historyResponse.ok) {
+                        const historyJson = await historyResponse.json();
+                        if (historyJson.message === 'Nutrition history fetched successfully') {
+                            setHistoryData(historyJson.data.filter(dayData => {
+                                const today = new Date().setHours(0, 0, 0, 0);
+                                const dayDate = new Date(dayData.date).setHours(0, 0, 0, 0);
+                                return dayDate < today; // Filter out today's data
+                            }));
+                        } else {
+                            console.log('No history data fetched or error occurred:', historyJson.message);
+                        }
+                    } else {
+                        throw new Error(`HTTP error! Status: ${historyResponse.status}`);
+                    }
+                } catch (error) {
+                    console.error('Error fetching nutrition history:', error);
+                }
 
                 setDataFetched(true); 
             }
@@ -160,7 +160,44 @@ const DashboardPage = () => {
                 })}
             </div>
         
-            
+            <div className="mt-8">
+                <h2 className="text-2xl font-bold mb-4 text-purple-700">Nutrition History</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {historyData.map((dayData) => {
+                        const totalMetrics = nutritionMetrics.reduce((acc, metric) => {
+                            const value = dayData[metric.key] || 0;
+                            acc.total += value;
+                            acc.standard += metric.standard;
+                            return acc;
+                        }, { total: 0, standard: 0 });
+
+                        const accomplishment = ((totalMetrics.total / totalMetrics.standard) * 100).toFixed(2);
+                        const message = getAccomplishmentMessage(accomplishment);
+
+                        return (
+                            <div key={dayData.date} className="bg-gray-100 p-4 rounded-lg shadow-md">
+                                <div className="flex justify-between mb-1">
+                                    <span className="text-xl font-medium text-purple-600">
+                                        {new Date(dayData.date).toLocaleDateString()}
+                                    </span>
+                                    <span className="text-xl font-medium text-purple-600">
+                                        {accomplishment}%
+                                    </span>
+                                </div>
+                                <div className="w-full bg-gray-300 rounded-full h-4">
+                                    <div
+                                        className="bg-purple-600 h-4 rounded-full"
+                                        style={{ width: `${Math.min(accomplishment, 100)}%` }}
+                                    ></div>
+                                </div>
+                                <div className="mt-2 text-purple-600">
+                                    {message}
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
         </div>
     );
 };
