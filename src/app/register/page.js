@@ -48,15 +48,7 @@ const Register = () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({
-                    fullname,
-                    nickname,
-                    email,
-                    password,
-                    birthDate,
-                    gender,
-                    allergy
-                }),
+                body: JSON.stringify({fullname, nickname, email, password, birthDate, gender, allergy}),
             });
             if (res.status === 400) {
                 setError("This email is already registered");
@@ -84,98 +76,44 @@ const Register = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">Full Name</label>
-                                <input
-                                    type="text"
-                                    placeholder="Full Name"
-                                    required
-                                    value={fullname}
-                                    onChange={(e) => setFullname(e.target.value)}
-                                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
-                                />
+                                <input type="text" placeholder="Full Name" required value={fullname} onChange={(e) => setFullname(e.target.value)} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"/>
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">Nickname</label>
-                                <input
-                                    type="text"
-                                    placeholder="Nickname"
-                                    required
-                                    value={nickname}
-                                    onChange={(e) => setNickname(e.target.value)}
-                                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
-                                />
+                                <input type="text" placeholder="Nickname" required value={nickname} onChange={(e) => setNickname(e.target.value)} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"/>
                             </div>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">Email</label>
-                                <input
-                                    type="email"
-                                    placeholder="Email Address"
-                                    required
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
-                                />
+                                <input type="email" placeholder="Email Address" required value={email} onChange={(e) => setEmail(e.target.value)} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"/>
                             </div>
-                            <div>
+                            {/* <div>
                                 <label className="block text-sm font-medium text-gray-700">Phone Number</label>
-                                <input
-                                    type="text"
-                                    placeholder="Phone Number"
-                                    required
-                                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
-                                />
-                            </div>
+                                <input type="text" placeholder="Phone Number" required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"/>
+                            </div> */}
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">Password</label>
-                                <input
-                                    type="password"
-                                    placeholder="Enter Password"
-                                    required
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
-                                />
+                                <input type="password" placeholder="Enter Password" required value={password}
+                                    onChange={(e) => setPassword(e.target.value)} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"/>
                             </div>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">Birth Date</label>
-                                <input
-                                    type="date"
-                                    required
-                                    value={birthDate}
-                                    onChange={(e) => setBirthDate(e.target.value)}
-                                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
-                                />
+                                <input type="date" required value={birthDate} onChange={(e) => setBirthDate(e.target.value)} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"/>
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">Gender</label>
                                 <div className="mt-1 flex space-x-4">
                                     <label className="flex items-center">
-                                        <input
-                                            type="radio"
-                                            name="gender"
-                                            value="male"
-                                            className="form-radio text-purple-600"
-                                            required
-                                            checked={gender === 'male'}
-                                            onChange={() => setGender('male')}
-                                        />
+                                        <input type="radio" name="gender" value="male" className="form-radio text-purple-600" required checked={gender === 'male'} onChange={() => setGender('male')}/>
                                         <span className="ml-2">Male</span>
                                     </label>
                                     <label className="flex items-center">
-                                        <input
-                                            type="radio"
-                                            name="gender"
-                                            value="female"
-                                            className="form-radio text-purple-600"
-                                            required
-                                            checked={gender === 'female'}
-                                            onChange={() => setGender('female')}
-                                        />
+                                        <input type="radio" name="gender" value="female" className="form-radio text-purple-600" required checked={gender === 'female'} onChange={() => setGender('female')}/>
                                         <span className="ml-2">Female</span>
                                     </label>
                                 </div>
@@ -183,32 +121,15 @@ const Register = () => {
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Allergy</label>
-                            <input
-                                type="text"
-                                placeholder="Allergy"
-                                required
-                                value={allergy}
-                                onChange={(e) => setAllergy(e.target.value)}
-                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
-                            />
+                            <input type="text" placeholder="Allergy" value={allergy} onChange={(e) => setAllergy(e.target.value)} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"/>
                         </div>
-                        <button
-                            type="submit"
-                            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-                        >
-                            Register
-                        </button>
+                        <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">Register</button>
                         {error && (
                             <p className="text-red-600 text-sm mt-2">{error}</p>
                         )}
                     </form>
                     <div className="text-center text-gray-500 mt-4">- OR -</div>
-                    <Link
-                        className="block text-center text-blue-500 hover:underline mt-2"
-                        href="/login"
-                    >
-                        Login with an existing account
-                    </Link>
+                    <Link className="block text-center text-blue-500 hover:underline mt-2" href="/login">Login with an existing account</Link>
                 </div>
             </div>
         )

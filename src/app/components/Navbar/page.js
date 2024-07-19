@@ -36,36 +36,21 @@ const Navbar = () => {
         <nav className="bg-gradient-to-b from-purple-700 to-purple-500 shadow-md p-4">
             <div className="container mx-auto flex justify-between items-center">
                 <div className="flex items-center space-x-2">
-                    <Image src="/logo_fruiter.png" className="rounded-full" alt="Frutier Logo" width={40} height={40} />
-                    <a href="/" className="text-2xl font-bold text-white">Frutier</a>
+                    <Image src="/new_logo.png" className="rounded-full" alt="Frutier Logo" width={40} height={40} />
+                    <a href="/" className="text-2xl font-bold text-white">Nutrify</a>
                 </div>
                 <div className="hidden md:flex items-center space-x-4">
                     {!session ? (
                         <>
-                            <Link href="/login" className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">Login</Link>
+                            <Link href="/login" className="bg-cyan-500 font-extrabold text-white px-4 py-2 rounded hover:bg-cyan-600">Login</Link>
                             <Link href="/register" className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 font-extrabold">Register</Link>
                         </>
                     ) : (
                         <>
-                            {/* <Link href="/viewpost" className="text-white hover:font-bold hover:text-xl transition-all duration-200 ease-in-out">User Thoughts</Link> */}
                             <Link href="/dashboard" className="bg-purple-400 text-white px-4 py-2 rounded hover:bg-purple-500 transition-all duration-300 ease-in-out">Dashboard</Link>
-                            
-                            {/* <div className="relative" ref={dropdownRef}>
-                                <span className="font-extrabold text-white cursor-pointer hover:bg-purple-600 border-2 transition-all duration-200 ease-in-out border-white rounded-full px-4 py-1 truncate max-w-sm" title={session.nickname} onClick={toggleDropdown}>
-                                    {session.nickname}
-                                </span>
-
-                                {dropdownVisible && (
-                                    <div className="absolute right-0 mt-0 w-fit bg-white rounded shadow-lg border-8 border-orange-600">
-                                        <Link href="/profile" className="block w-full px-4 py-2 text-gray-700 hover:bg-gray-500 hover:rounded" onClick={toggleDropdown}>Edit Profile</Link>
-
-                                        <button className="border-0 rounded cursor-pointer block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-500 hover:rounded" onClick={() => { signOut(); }}>Logout</button>
-                                    </div>
-                                )}
-                            </div> */}
 
                             <div className="dropdown border-0">
-                                <div tabIndex={0} role="button" className=" font-extrabold text-white cursor-pointer hover:bg-purple-600 border-2 transition-all duration-200 ease-in-out border-white rounded-full px-4 py-1 truncate max-w-sm bg-none">{session.nickname}</div>
+                                <div tabIndex={0} role="button" className=" font-extrabold text-white cursor-pointer hover:bg-purple-600 border-2 transition-all duration-200 ease-in-out border-white rounded-full px-4 py-1 truncate max-w-sm bg-none">{session.name}</div>
 
                                 <ul tabIndex={0} className="dropdown-content bg-purple-500 z-[1] w-fit p-2 shadow">
                                     <li><Link href="/profile" className="block w-full px-4 py-2 text-white hover:bg-purple-400 font-bold hover:rounded" onClick={toggleDropdown}>Profile</Link></li>
@@ -92,8 +77,8 @@ const Navbar = () => {
                         <>
                             <Link href="/dashboard" className="bg-purple-400 text-white px-4 py-2 rounded w-full text-left hover:bg-purple-500 transition-all duration-300 ease-in-out">Dashboard</Link>
                             <div className="relative w-full border-0 my-2 text-center">
-                                <span className="font-extrabold text-white cursor-pointer hover:bg-purple-600 border-2 transition-all duration-200 ease-in-out border-white rounded-full px-4 py-1 truncate max-w-sm text-center mx-auto" title={session.nickname} onClick={toggleDropdown}>
-                                    {session.nickname}
+                                <span className="font-extrabold text-white cursor-pointer hover:bg-purple-600 border-2 transition-all duration-200 ease-in-out border-white rounded-full px-4 py-1 truncate max-w-sm text-center mx-auto" title={session.name} onClick={toggleDropdown}>
+                                    {session.name}
                                 </span>
                                 {dropdownVisible && (
                                     <div className="w-full mt-2 bg-gradient-to-b from-purple-500 to-purple-300 rounded-xl ">

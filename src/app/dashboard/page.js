@@ -30,6 +30,7 @@ const nutritionMetrics = [
     { name: 'Vitamin E', unit: 'mg', standard: 15, key: 'vitamin E (mg)' }
 ];
 
+
 const getRandomMessage = (messages) => {
     return messages[Math.floor(Math.random() * messages.length)];
 };
@@ -41,11 +42,6 @@ const getAccomplishmentMessage = (percentage) => {
         { threshold: 70, messages: ["Good job!", "Nice progress!", "You're on the right track!"] },
         { threshold: 60, messages: ["You're doing well, keep going!", "Solid effort!", "Keep pushing!"] },
         { threshold: 50, messages: ["Halfway there, don't stop!", "You're getting there!", "Keep the momentum!"] },
-        { threshold: 40, messages: ["Let's improve a bit more!", "Keep trying, you can do it!", "Don't give up, you're making progress!"] },
-        { threshold: 30, messages: ["Every step counts, keep going!", "You're doing okay, but there's room for improvement!", "Keep striving, you can do it!"] },
-        { threshold: 20, messages: ["Let's put in more effort!", "You can achieve more, keep going!", "Don't stop, you can improve!"] },
-        { threshold: 10, messages: ["Keep pushing, you can do better!", "Let's aim higher!", "Don't give up, keep trying!"] },
-        { threshold: 0, messages: ["Let's try to improve today!", "Every effort counts, start small!", "You can do it, keep going!"] }
     ];
 
     for (const level of messages) {
@@ -106,18 +102,14 @@ const DashboardPage = () => {
                     console.error('Error fetching nutrition history:', error);
                 }
 
-                setDataFetched(true); // Set dataFetched to true after fetching data
+                setDataFetched(true); 
             }
         };
 
         if (status === 'authenticated') {
             fetchData();
         }
-    }, [session, status, dataFetched]); // Add dataFetched to the dependency array
-
-    // if (status === 'loading') {
-    //     return <div className="flex items-center justify-center h-screen">Loading...</div>;
-    // }
+    }, [session, status, dataFetched]); 
     if (status === 'unauthenticated') {
         router.push('/login');
         return null;

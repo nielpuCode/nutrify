@@ -8,9 +8,10 @@ export default function Profile() {
     const { data: session, status, update } = useSession();
     const router = useRouter();
 
-    const [fullname, setFullname] = useState(""); 
+    const [fullname, setFullname] = useState("");
     const [nickname, setNickname] = useState("");
     const [email, setEmail] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
     const [password, setPassword] = useState("");
     const [birthDate, setBirthDate] = useState("");
     const [gender, setGender] = useState("");
@@ -27,6 +28,7 @@ export default function Profile() {
             setFullname(session.user.name || "");
             setNickname(session.nickname || "");
             setEmail(session.email || "");
+            setPhoneNumber(session.phoneNumber || "");
             setPassword("");
             setBirthDate(session.birthDate || "");
             setGender(session.gender || "");
@@ -45,6 +47,7 @@ export default function Profile() {
                 fullname,
                 nickname,
                 email,
+                phoneNumber,
                 password,
                 birthDate,
                 gender,
@@ -97,6 +100,16 @@ export default function Profile() {
                             className="mt-1 p-2 w-full border border-purple-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
                         />
                     </div>
+                    {/* <div>
+                        <label className="block text-gray-700">Phone Number</label>
+                        <input
+                            type="text"
+                            name="phoneNumber"
+                            value={phoneNumber}
+                            onChange={(e) => setPhoneNumber(e.target.value)}
+                            className="mt-1 p-2 w-full border border-purple-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        />
+                    </div> */}
                     <div>
                         <label className="block text-gray-700">Password</label>
                         <input
@@ -119,17 +132,30 @@ export default function Profile() {
                     </div>
                     <div>
                         <label className="block text-gray-700">Gender</label>
-                        <select
-                            name="gender"
-                            value={gender}
-                            onChange={(e) => setGender(e.target.value)}
-                            className="mt-1 p-2 w-full border border-purple-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                        >
-                            <option value="">Select Gender</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                        </select>
+                        <div className="flex items-center mt-1 space-x-4">
+                            <label className="flex items-center">
+                                <input
+                                    type="radio"
+                                    name="gender"
+                                    value="male"
+                                    checked={gender === "male"}
+                                    onChange={(e) => setGender(e.target.value)}
+                                    className="form-radio h-4 w-4 text-purple-600"
+                                />
+                                <span className="ml-2 text-gray-700">Male</span>
+                            </label>
+                            <label className="flex items-center">
+                                <input
+                                    type="radio"
+                                    name="gender"
+                                    value="female"
+                                    checked={gender === "female"}
+                                    onChange={(e) => setGender(e.target.value)}
+                                    className="form-radio h-4 w-4 text-purple-600"
+                                />
+                                <span className="ml-2 text-gray-700">Female</span>
+                            </label>
+                        </div>
                     </div>
                     <div>
                         <label className="block text-gray-700">Allergy</label>

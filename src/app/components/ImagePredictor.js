@@ -75,16 +75,12 @@ const ImagePredictor = ({ onPrediction, onTogglePrediction }) => {
                 <p className="text-lg font-medium text-red-500">{errorMessage}</p>
             )}
             {prediction && (
-                <div className="mt-4">
-                    <p className="text-lg font-medium text-purple-700">Prediction: {prediction.label}</p>
-                    <p className="text-lg font-medium text-purple-700">Confidence: {prediction.confidence.toFixed(2)}%</p>
+                <div className="mt-4 border-0 w-full md:w-[85%] mx-auto">
+                    <p className="text-3xl md:text-xl font-medium text-purple-500">It is <span className='font-extrabold text-3xl text-purple-700'>{prediction.label}</span></p>
+                    {/* <p className="text-lg font-medium text-purple-700">Confidence: {prediction.confidence.toFixed(2)}%</p> */}
                     {alternativePrediction && alternativePrediction.prediction && (
-                        <button 
-                            onClick={handleTogglePrediction} 
-                            className="mt-2 text-sm text-purple-500 underline"
-                        >
-                            Or it may be {alternativePrediction.prediction.label} from {alternativePrediction.model}
-                        </button>
+                        <button onClick={handleTogglePrediction} className="mt-2 text-sm text-purple-500 underline">Or it may be {alternativePrediction.prediction.label} from {alternativePrediction.model}</button>
+                        // <button onClick={handleTogglePrediction} className="mt-0 text-sm text-purple-500">Or it may be <span className='font-bold underline italic'>{alternativePrediction.prediction.label}</span></button>
                     )}
                 </div>
             )}

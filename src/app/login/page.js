@@ -48,10 +48,6 @@ const Login = () => {
         }
     };
 
-    // if (sessionStatus === "loading") {
-    //     return <h1>Loading...</h1>;
-    // }
-
     return (
         sessionStatus !== "authenticated" && (
             <div className="flex justify-center mt-16">
