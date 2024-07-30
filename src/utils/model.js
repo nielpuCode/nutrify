@@ -52,7 +52,7 @@ export async function predictSingleImage(imageElement) {
     const prediction2 = await predictWithModel(model2, imageElement);
     
     if (!prediction1 && !prediction2) {
-        return null; // Return null if both models fail to detect
+        return null;
     }
 
     return { 

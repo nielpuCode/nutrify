@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 const Login = () => {
     const router = useRouter();
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
     const { data: session, status: sessionStatus } = useSession();
 
     useEffect(() => {
@@ -35,11 +36,15 @@ const Login = () => {
             return;
         }
 
+        setLoading(true); // Set loading state to true
+
         const res = await signIn("credentials", {
             redirect: false,
             email,
             password,
         });
+
+        setLoading(false); // Set loading state to false after response
 
         if (res?.error) {
             setError(res.error);
@@ -76,13 +81,20 @@ const Login = () => {
                                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
                             />
                         </div>
-                        <a href="#" className="text-xs text-gray-600 hover:underline hover:text-blue-600">Forgot Password?</a>
+                        {/* <a href="#" className="text-xs text-gray-600 hover:underline hover:text-blue-600">Forgot Password?</a> */}
                         <div>
                             <button
                                 type="submit"
                                 className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                disabled={loading}
                             >
-                                Sign In
+                                {loading ? (
+                                    <div className="flex justify-center items-center">
+                                        <div className="loader border-t-4 border-white rounded-full w-6 h-6 animate-spin"></div>
+                                    </div>
+                                ) : (
+                                    "Sign In"
+                                )}
                             </button>
                             {error && <p className="text-red-600 text-sm mt-2">{error}</p>}
                         </div>

@@ -1,4 +1,4 @@
-// This is my src/app/register/page.js
+// src/app/register/page.js
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 
 const Register = () => {
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
     const { data: session, status: sessionStatus } = useSession();
 
@@ -16,7 +17,6 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [birthDate, setBirthDate] = useState("");
     const [gender, setGender] = useState("");
-    const [allergy, setAllergy] = useState("");
 
     useEffect(() => {
         if (sessionStatus === "authenticated") {
@@ -42,22 +42,26 @@ const Register = () => {
             return;
         }
 
+        setLoading(true); // Set loading state to true
+
         try {
             const res = await fetch("/api/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({fullname, nickname, email, password, birthDate, gender, allergy}),
+                body: JSON.stringify({fullname, nickname, email, password, birthDate, gender}),
             });
+            setLoading(false); // Set loading state to false after response
+
             if (res.status === 400) {
                 setError("This email is already registered");
-            }
-            if (res.status === 200) {
+            } else if (res.status === 200) {
                 setError("");
                 router.push("/login");
             }
         } catch (error) {
+            setLoading(false); // Set loading state to false in case of error
             setError("Error, try again");
             console.log(error);
         }
@@ -88,12 +92,6 @@ const Register = () => {
                                 <label className="block text-sm font-medium text-gray-700">Email</label>
                                 <input type="email" placeholder="Email Address" required value={email} onChange={(e) => setEmail(e.target.value)} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"/>
                             </div>
-                            {/* <div>
-                                <label className="block text-sm font-medium text-gray-700">Phone Number</label>
-                                <input type="text" placeholder="Phone Number" required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"/>
-                            </div> */}
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">Password</label>
                                 <input type="password" placeholder="Enter Password" required value={password}
@@ -119,11 +117,19 @@ const Register = () => {
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700">Allergy</label>
-                            <input type="text" placeholder="Allergy" value={allergy} onChange={(e) => setAllergy(e.target.value)} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"/>
-                        </div>
-                        <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">Register</button>
+                        <button
+                            type="submit"
+                            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+                            disabled={loading}
+                        >
+                            {loading ? (
+                                <div className="flex justify-center items-center">
+                                    <div className="loader border-t-4 border-white rounded-full w-6 h-6 animate-spin"></div>
+                                </div>
+                            ) : (
+                                "Register"
+                            )}
+                        </button>
                         {error && (
                             <p className="text-red-600 text-sm mt-2">{error}</p>
                         )}

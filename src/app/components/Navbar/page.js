@@ -50,7 +50,7 @@ const Navbar = () => {
                             <Link href="/dashboard" className="bg-purple-400 text-white px-4 py-2 rounded hover:bg-purple-500 transition-all duration-300 ease-in-out">Dashboard</Link>
 
                             <div className="dropdown border-0">
-                                <div tabIndex={0} role="button" className=" font-extrabold text-white cursor-pointer hover:bg-purple-600 border-2 transition-all duration-200 ease-in-out border-white rounded-full px-4 py-1 truncate max-w-sm bg-none">{session.name}</div>
+                                <div tabIndex={0} role="button" className=" font-extrabold text-white cursor-pointer hover:bg-purple-600 border-2 transition-all duration-200 ease-in-out border-white rounded-full px-4 py-1 truncate max-w-sm bg-none">{session.nickname}</div>
 
                                 <ul tabIndex={0} className="dropdown-content bg-purple-500 z-[1] w-fit p-2 shadow">
                                     <li><Link href="/profile" className="block w-full px-4 py-2 text-white hover:bg-purple-400 font-bold hover:rounded" onClick={toggleDropdown}>Profile</Link></li>

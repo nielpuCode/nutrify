@@ -97,7 +97,7 @@ const Home = () => {
                 <div className="flex flex-col md:flex-row w-full justify-around border-0 cursor-default space-y-4 md:space-y-0 md:space-x-4">
                     <div className="w-full max-w-sm bg-white rounded-lg shadow-xl p-6 border-0">
                         <ImagePredictor onPrediction={handleNutritionPrediction} onTogglePrediction={handleTogglePrediction} />
-                        {nutritionResult && (
+                        {nutritionResult && session && (
                             <button onClick={handleAddToDatabase} className="bg-blue-500 text-white px-4 py-2 mt-4 rounded hover:bg-blue-600">
                                 Add to Database
                             </button>

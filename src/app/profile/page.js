@@ -157,7 +157,7 @@ export default function Profile() {
                             </label>
                         </div>
                     </div>
-                    <div>
+                    {/* <div>
                         <label className="block text-gray-700">Allergy</label>
                         <input
                             type="text"
@@ -166,7 +166,7 @@ export default function Profile() {
                             onChange={(e) => setAllergy(e.target.value)}
                             className="mt-1 p-2 w-full border border-purple-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
                         />
-                    </div>
+                    </div> */}
                     <button
                         type="submit"
                         className="w-full py-2 px-4 bg-purple-600 text-white font-semibold rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
